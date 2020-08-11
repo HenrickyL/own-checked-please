@@ -1,0 +1,9 @@
+#page-monitor main{
+    margin-top: 4vh;
+}
+
+#page-monitor-views{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

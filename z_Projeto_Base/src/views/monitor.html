@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/Pelikan-color.png">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/monitor.css">
+    <link rel="stylesheet" href="/styles/responsive.css">
+    <title>Monitor</title>
+</head>
+<body id="page-monitor" class="view">
+    <header>
+        <div class="head-bar">
+            <button class="bt-return"><img src="/img/arrow-left.svg" alt=""></button>
+            <div class="triangle-box">
+                <img id="logo" src="/img/logo.png" alt="logo">
+                <div class="triangle">
+                </div>
+            </div>
+            <button class="bt-options"><img src="/img/menu.svg" alt="icon menu"></button>
+        </div>
+    </header>
+    <main id="page-monitor-views">
+        <header class="monitor-box">
+            <div id="statistics">
+                <span>Resultados:</span>
+            </div>
+            <div class="filter-options" alt="filto">
+                <label for="filter">Filtrar por:</label>
+                <select name="filter" id="filter" alt="Filtro">
+                    <!-- <optgroup label="Filtos"></optgroup> -->
+                        <option value="language">Linguagens</option>
+                        <option value="module">Módulos</option>
+                </select>
+                
+            </div>
+    
+        </header>
+        <details class="list-translations">
+            <div class="ajuste"></div>
+            <summary class="title-list" alt="Lista de traduções">
+                <h2>Traduções:</h2><span class="qtd">Qtd:</span>
+            </summary>
+            
+        
+            <div class="translation">
+                <div class="title-translation" >
+                    <h3>resource_id {{translations}}</h3><span class="update">update</span>
+                </div>
+                <span>Valor</span>
+            </div>
+        
+       
+        </details>
+        
+
+        <script type="module" src="/scripts/monitor.js"></script>
+    </main>
+</body>
+</html> 

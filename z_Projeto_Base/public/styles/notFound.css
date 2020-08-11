@@ -1,0 +1,25 @@
+.head-bar{
+    background-color: var(--color-especial2);
+}
+
+.triangle{
+    border-left: 20vw solid transparent;
+    border-right: 20vw solid transparent;
+    border-top: 6vh solid var(--color-especial2);
+}
+#not-found{
+    width: 100%;
+    height: 100%;
+    background-image: url(/img/error.png);
+    background-repeat: no-repeat;
+    background-position:center;
+    background-position-y: 40vh ;
+    background-size: 70vw;
+    
+}
+#not-found main{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15vh;
+}
+

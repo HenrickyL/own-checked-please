@@ -1,0 +1,56 @@
+.head-bar{
+    background-color: var(--color-base);
+}
+
+.triangle{
+    
+    border-top: 6vh solid var(--color-base);
+}
+
+button.bt-return:hover, .bt-options:hover{
+    background-color: var(--color-base-light);
+}
+
+#page-search main{
+    margin-top: 4vh;
+}
+
+.search-views{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.monitor-box{
+    flex-direction: column;
+}
+
+.monitor-box label{
+    font-weight: bold;
+    margin: 5px 0;
+}
+.monitor-box input{
+    padding: 5px;
+    background-color: var(--color-background2);
+    text-align: center;
+    font-size: 16px;
+    width: 60vw;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-bottom: 2vh;
+    border: 1px solid #00000066;
+}
+.monitor-box input:hover{
+    background-color: white;
+    border: 2px solid black;
+    padding: 4px;
+
+}
+.list-translations .title-list{
+    background-color: var(--color-primary);
+}
+.list-translations .translation .title-translation{
+    background-color: var(--color-pri-light);
+}
+.list-translations .translation:hover{
+    background-image: linear-gradient(var(--color-base-light),white);
+}
