@@ -1,0 +1,61 @@
+/* @media (max-width:400px){
+    #logo{
+        width: 10vw;
+        height: 10vw;
+        left:-6vw;
+        top: -10vh;
+    }
+    .head-triangle{
+        left:30vw;
+        left:30vw;
+        border-left: 20vw solid transparent;
+        border-right: 20vw solid transparent;
+        border-top: 12vw solid var(--color-primary);
+    }
+}
+
+
+
+@media(min-width:100px) {
+    #logo{
+        width: 60px;
+        height: 60px;
+        top:-15vw;
+        left:-5vw;
+    }
+    .head-triangle{
+        left:30vw;
+        top: 5.5vh;
+        border-left: 20vw solid transparent;
+        border-right: 20vw solid transparent;
+        border-top: 10vw solid var(--color-primary); 
+    }
+}
+
+@media (min-width:1200px){
+    #logo{
+        width: 60px;
+        height: 60px;
+        top:-6vw;
+        left:-2.3vw;
+    }
+    .head-triangle{
+        left:35vw;
+        border-left: 15vw solid transparent;
+        border-right: 15vw solid transparent;
+        border-top: 7vw solid var(--color-primary); 
+    }
+}
+ */
+@media (max-height:300px){
+    .triangle{
+        border-top: 20px solid var(--color-primary);
+    }
+}
+
+@media (min-width:500px){
+    .triangle{
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+    }
+}

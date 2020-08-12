@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/buys.css">
+    <link rel="stylesheet" href="/styles/responsive.css">
+    <title>Monitor</title>
+</head>
+<body id="page-monitor" class="view">
+    <header>
+        <div class="head-bar">
+            <button class="bt-return"><img src="/img/arrow-left.svg" alt=""></button>
+            <div class="triangle-box">
+                <img id="logo" src="/img/logo_micro.png" alt="logo">
+                <div class="triangle">
+                </div>
+            </div>
+            <button class="bt-options"><img src="/img/menu.svg" alt="icon menu"></button>
+        </div>
+    </header>
+    <main id="page-monitor-views">
+        <header class="monitor-box">
+            <div id="statistics">
+                <span>Resultados:</span>
+            </div>
+            <div class="filter-options" alt="filto">
+                <label for="filter">Filtrar por:</label>
+                <select name="filter" id="filter" alt="Filtro">
+                    <optgroup  label="categorias"></optgroup>
+                        <option  value="language">Linguagens</option>
+                        <option value="module">Módulos</option>
+                </select>
+                
+            </div>
+    
+        </header>
+        <details class="list-translations" open>
+            <div class="ajuste"></div>
+            <summary class="title-list" alt="Lista de traduções">
+                <h2>Traduções:</h2><span class="qtd">Qtd:</span>
+            </summary>
+            
+        
+            <div class="translation">
+                <div class="title-translation" >
+                    <h3>resource_id {{translations}}</h3><span class="update">update</span>
+                </div>
+                <span>Valor</span>
+            </div>
+        
+       
+        </details>
+
+        <button class="bt-add">+</button>
+
+        <div class="add-popup hide">
+            <form class="add-box">
+                <header>
+                    <h2>Adicionar compra:</h2>
+                </header>
+                <fieldset>
+                    <div class="field">
+                        <label for="valor">Valor da compra</label>
+                        <input type="text" placeholder="R$" id="valor">
+                    </div>
+                    <div class="personalize">
+                        <details class="add-status">
+                            <summary><label for="add-category">Categoria:</label> <input type="checkbox" name="add-category" id="add-category"></summary>
+                            <div class="field-group">
+                                <input type="radio" name="category" id="food" >
+                                <label for="food">Alimentação</label> 
+                            </div>
+                        </details>
+                        <details class="add-status">
+                        <summary>
+                            <span>Data Personalidada?</span> 
+                            <input type="checkbox" name="date-edit" id="date-edit">
+                        </summary>
+                        </details>
+                    </div> 
+                    <textarea name="Description" placeholder="Detalhes" id="" cols="30" rows="10">
+                    </textarea>
+                </fieldset>
+            </form>
+        </div>
+        
+
+        <script type="module" src="/scripts/buys.js"></script>
+    </main>
+</body>

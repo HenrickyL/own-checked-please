@@ -1,5 +1,3 @@
-
-// import dataOp from "../../src/dataOp.js"
 let btMonitor = null
 let btSearch = null
 let conectStatus = null
@@ -25,10 +23,10 @@ function loadItems(){
 }
 function activateButtons(){
     btMonitor.addEventListener("click",()=>{
-        window.location = "/monitor"
+        window.location = "/buys"
     })
     btSearch.addEventListener("click",()=>{
-        window.location = "/search"
+        window.location = "/month"
     })
     setInterval(()=>{
         if(navigator.onLine){

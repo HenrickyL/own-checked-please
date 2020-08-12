@@ -1,14 +1,12 @@
 #app-home{
-    background-color: gray/*var(--color-especial)*/;
+    background-color: var(--color-especial);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
 #app-home img#main-logo{
     width: 60vw;
-    max-width: 200px;
+    max-width: 400px;
     /* border: 1px solid red; */
     /* margin-left:20vw ; */
 }
@@ -25,6 +23,10 @@
     padding: 5vh 0;
 }
 
+body{
+    height: 100vh;
+}
+
 #app-home-views h1,h3{
     color: var(--color-primary);
     text-shadow: 2px 4px 10px black;
@@ -32,7 +34,6 @@
     /* padding: 5vh 0; */
     
 }
-
 #app-home-views h3{
     color: var(--color-background);
 }
@@ -42,6 +43,13 @@
     width: 80vw;
     font-size: 60%;
     margin-bottom: 5vh;
+}
+
+
+/* conect */
+#app-home{
+    display: flex;
+    flex-direction: column;
 }
 
 #app-home #conectivity{
@@ -54,3 +62,19 @@
     align-items: flex-start;
     
 }
+
+#app-home .conect #color-status{
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: 1px solid;
+}
+
+.conected:not(.disconected){
+    background-color: lawngreen;
+}
+.disconected:not(.conected){
+    background-color: red;
+
+}
+

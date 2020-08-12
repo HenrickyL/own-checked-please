@@ -20,6 +20,13 @@ app.get('/',(req, res)=>{
     return res.render("index.html")
 })
 
+app.get('/buys',(req, res)=>{
+    return res.render("buys.html")
+})
+
+app.get('/month',(req, res)=>{
+    return res.render("month.html")
+})
 
 
 app.get("/*",(req, res)=>{
