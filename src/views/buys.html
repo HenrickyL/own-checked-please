@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/buys.css">
     <link rel="stylesheet" href="/styles/responsive.css">
-    <title>Monitor</title>
+    <title>Compras</title>
 </head>
 <body id="page-monitor" class="view">
     <header>
         <div class="head-bar">
             <button class="bt-return"><img src="/img/arrow-left.svg" alt=""></button>
             <div class="triangle-box">
-                <img id="logo" src="/img/logo_micro.png" alt="logo">
+                <img id="logo" src="/img/own_fly.png" alt="logo">
                 <div class="triangle">
                 </div>
             </div>
@@ -23,15 +23,16 @@
     </header>
     <main id="page-monitor-views">
         <header class="monitor-box">
-            <div id="statistics">
+            <div class="statistics">
                 <span>Resultados:</span>
             </div>
             <div class="filter-options" alt="filto">
                 <label for="filter">Filtrar por:</label>
                 <select name="filter" id="filter" alt="Filtro">
-                    <optgroup  label="categorias"></optgroup>
-                        <option  value="language">Linguagens</option>
-                        <option value="module">Módulos</option>
+                    
+                        <option  value="data">Data</option>
+                        <option value="valor">Valor</option>
+                        <option value="categoria">Categoria</option>
                 </select>
                 
             </div>
@@ -40,53 +41,103 @@
         <details class="list-translations" open>
             <div class="ajuste"></div>
             <summary class="title-list" alt="Lista de traduções">
-                <h2>Traduções:</h2><span class="qtd">Qtd:</span>
+                <h2>Compras de <span>Agosto</span>:</h2><span class="qtd">Total:</span>
             </summary>
             
         
             <div class="translation">
                 <div class="title-translation" >
-                    <h3>resource_id {{translations}}</h3><span class="update">update</span>
+                    <h3>data</h3><span class="update">Preço</span>
                 </div>
                 <span>Valor</span>
+                <div class="buy-category"></div>
             </div>
+
+            <div class="translation">
+                <div class="title-translation" >
+                    <h3>data</h3><span class="update">Preço</span>
+                </div>
+                <span>Valor</span>
+                <div class="buy-category"></div>
+            </div>  
         
        
         </details>
 
         <button class="bt-add">+</button>
-
-        <div class="add-popup hide">
-            <form class="add-box">
-                <header>
-                    <h2>Adicionar compra:</h2>
-                </header>
-                <fieldset>
-                    <div class="field">
-                        <label for="valor">Valor da compra</label>
-                        <input type="text" placeholder="R$" id="valor">
-                    </div>
-                    <div class="personalize">
-                        <details class="add-status">
-                            <summary><label for="add-category">Categoria:</label> <input type="checkbox" name="add-category" id="add-category"></summary>
-                            <div class="field-group">
-                                <input type="radio" name="category" id="food" >
-                                <label for="food">Alimentação</label> 
-                            </div>
-                        </details>
-                        <details class="add-status">
-                        <summary>
-                            <span>Data Personalidada?</span> 
-                            <input type="checkbox" name="date-edit" id="date-edit">
-                        </summary>
-                        </details>
-                    </div> 
-                    <textarea name="Description" placeholder="Detalhes" id="" cols="30" rows="10">
-                    </textarea>
-                </fieldset>
-            </form>
-        </div>
+<!-- ////////////////////////////////////////////////////////////// -->
+        <div class="add-popup hide"></div>
         
+        <fieldset class="add-box hide">
+            <header>
+                <h2>Adicionar compra:</h2>
+                <h2 id="date-now"></h2>
+            </header>
+            <form  >
+                <div class="ajuste"></div>
+                <div class="field">
+                    <label for="valor">Valor da compra</label>
+                    <input id="buy-value" type="number" min="0" step="0.05" placeholder="R$" required/>
+                </div>
+                <div class="personalize">
+                    <details class="add-category" >
+                        <summary>
+                            <span>Categoria:</span>
+                            <input type="checkbox" name="add-category" id="add-category">
+                        </summary>
+                        <div class="field-group">
+                            <input type="radio" name="category" id="food" >
+                            <label for="food">Alimentação</label> 
+                        </div>
+                        <div class="field-group">
+                            <input type="radio" name="category" id="transport" >
+                            <label for="transport">Transporte</label> 
+                        </div>
+                    </details>
+                    <details class="add-status">
+                    <summary>
+                        <span>Data Personalidada?</span> 
+                        <input type="checkbox" name="date-edit" id="date-edit">
+                    </summary>
+                    
+                    <div class="field-group date-time">
+                        <div class="field">
+                            <label for="date">Data:</label>
+                            <input type="date"  name="date" id="date">
+                            
+                        </div>
+                        <div class="field">
+                            <label for="time">Hora:</label>
+                            <input type="time" placeholder="date" name="time" id="time">
+                            
+                        </div>
+                    </div>
+                    </details>
+                </div> 
+                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10" required></textarea>
+                <input type="submit" value="Adicionar" id="add-submit">
+            </form>
+        </fieldset>
+
+        <div class="menu-op">
+            <div class="triangle-box">
+                <div class="triangle-up">
+            </div>
+            </div>
+            <ul>
+                <li>Definir limite</li>
+                <li>Apagar dados</li>
+                <li>Encerrar conta</li>
+            </ul>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Pesquisar">
+            <button></button>
+        </div>
+
+
+
 
         <script type="module" src="/scripts/buys.js"></script>
     </main>

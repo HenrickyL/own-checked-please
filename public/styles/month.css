@@ -11,7 +11,7 @@ button.bt-return:hover, .bt-options:hover{
     background-color: var(--color-base-light);
 }
 
-#page-search main{
+/* #page-search main{
     margin-top: 4vh;
 }
 
@@ -44,7 +44,7 @@ button.bt-return:hover, .bt-options:hover{
     border: 2px solid black;
     padding: 4px;
 
-}
+} */
 .list-translations .title-list{
     background-color: var(--color-primary);
 }
@@ -53,4 +53,13 @@ button.bt-return:hover, .bt-options:hover{
 }
 .list-translations .translation:hover{
     background-image: linear-gradient(var(--color-base-light),white);
+}
+
+.search-bar button{
+    background-color: var(--color-base-light);
+    border: 1px solid lightskyblue;
+}
+
+.search-bar.focused > button:active{
+    background-color: lightsteelblue;
 }

@@ -3,51 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/img/Pelikan-color.png">
+    <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/buys.css">
     <link rel="stylesheet" href="/styles/month.css">
-
     <link rel="stylesheet" href="/styles/responsive.css">
-    <title>Pesquisar</title>
-
-    
+    <title>Contas</title>
 </head>
-<body id="page-search" class="view">
+<body id="page-monitor" class="view">
     <header>
         <div class="head-bar">
             <button class="bt-return"><img src="/img/arrow-left.svg" alt=""></button>
             <div class="triangle-box">
-                <img id="logo" src="/img/logo.png" alt="logo">
+                <img id="logo" src="/img/own_read.png" alt="logo">
                 <div class="triangle">
                 </div>
             </div>
             <button class="bt-options"><img src="/img/menu.svg" alt="icon menu"></button>
         </div>
     </header>
-    <main class="search-views">
-       
-        <div class="monitor-box">
-            <label for="">Pesquisar conteúdo:</label>
-            <input type="text">
-        </div>
-        <details class="list-translations">
+    <main id="page-monitor-views">
+        <header class="monitor-box">
+            <div class="statistics">
+                <span>Resultados:</span>
+                <span>Qtd Contas:</span>
+                <p>
+                            
+                    <span>Ativas:</span>
+                    <span>desativas:</span>
+                </p>
+            </div>
+            <div class="filter-options" alt="filto">
+                <label for="filter">Filtrar por:</label>
+                <select name="filter" id="filter" alt="Filtro">
+                    
+                    <option  value="data">Data</option>
+                    <option value="valor">Valor</option>
+                    <option value="categoria">Categoria</option>
+                </select>
+                
+            </div>
+    
+        </header>
+        <details class="list-translations" open>
             <div class="ajuste"></div>
-            <summary class="title-list">
-                <h2>Traduções Encontradas:</h2><span class="qtd">Qtd:</span>
+            <summary class="title-list" alt="Lista de traduções">
+                <h2>Contas:</h2><span class="qtd">Total:</span>
             </summary>
             
+        
             <div class="translation">
-                <div class="title-translation">
-                    <h3>resource_id</h3><span class="update">update</span>
+                <div class="title-translation" >
+                    <h3>data</h3><span class="update">Preço</span>
                 </div>
                 <span>Valor</span>
+                <div class="buy-category"></div>
             </div>
 
-<!--  -->
-
+            <div class="translation">
+                <div class="title-translation" >
+                    <h3>data</h3><span class="update">Preço</span>
+                </div>
+                <span>Valor</span>
+                <div class="buy-category"></div>
+            </div>  
+        
+       
         </details>
 
-        <script type="module" src="/scripts/month.js"></script>
+        <button class="bt-add">+</button>
+<!-- ////////////////////////////////////////////////////////////// -->
+        <div class="add-popup hide"></div>
+        
+        <fieldset class="add-box hide">
+            <header>
+                <h2>Adicionar compra:</h2>
+                <h2 id="date-now"></h2>
+            </header>
+            <form  >
+                <div class="ajuste"></div>
+                <div class="field">
+                    <label for="valor">Valor da compra</label>
+                    <input id="buy-value" type="number" min="0" step="0.05" placeholder="R$" required/>
+                </div>
+                <div class="personalize">
+                    <details class="add-category" >
+                        <summary>
+                            <span>Categoria:</span>
+                            <input type="checkbox" name="add-category" id="add-category">
+                        </summary>
+                        <div class="field-group">
+                            <input type="radio" name="category" id="food" >
+                            <label for="food">Alimentação</label> 
+                        </div>
+                        <div class="field-group">
+                            <input type="radio" name="category" id="transport" >
+                            <label for="transport">Transport</label> 
+                        </div>
+                    </details>
+                    <details class="add-status">
+                    <summary>
+                        <span>Data Personalidada?</span> 
+                        <input type="checkbox" name="date-edit" id="date-edit">
+                    </summary>
+                    
+                    <div class="field-group date-time">
+                        <div class="field">
+                            <label for="date">Data:</label>
+                            <input type="date"  name="date" id="date">
+                            
+                        </div>
+                        <div class="field">
+                            <label for="time">Hora:</label>
+                            <input type="time" placeholder="date" name="time" id="time">
+                            
+                        </div>
+                    </div>
+                    </details>
+                </div> 
+                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10" required></textarea>
+                <input type="submit" value="Adicionar" id="add-submit">
+            </form>
+        </fieldset>
+
+        <div class="menu-op">
+            <div class="triangle-box">
+                <div class="triangle-up">
+            </div>
+            </div>
+            <ul>
+                <li>Definir limite</li>
+                <li>Apagar dados</li>
+                <li>Encerrar conta</li>
+            </ul>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Pesquisar">
+            <button></button>
+        </div>
+
+
+        <script type="module" src="/scripts/buys.js"></script>
     </main>
 </body>
-</html> 

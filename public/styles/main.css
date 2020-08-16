@@ -1,16 +1,20 @@
 :root{
-    --color-background: #f4faf4;
-    --color-background2: #f4f4fa;
-    --color-primary:#3AB556;
-    --color-pri-light: #93e1b5/*#9bdeac*/;
-    --color-base:#3282b8;
-    --color-base-light:#93b5e1;
-    --color-especial:#45046a;
-    --color-especial2:#A20EE8;
-    --color-secundary:#F56836;
-    --color-sec-dark:#A62D02;
+    --color-background: #dfdad7;
+    --color-background2: #9799C4;
+    --color-primary:#116350;
+    --color-pri-light: #00B087/*#9bdeac*/;
+    --color-base:#071663;
+    --color-base-light:#152EB0;
+    --color-especial:#361B63;
+    --color-especial2:#581B7A;
+    --color-secundary:#0C4085;
+    --color-sec-light:#A62D02;
     font-size: 60%;
 
+}
+.hide{
+    transform: scale(0);
+    
 }
 *{
     margin: 0;
@@ -35,6 +39,8 @@ textarea{
     font-family: Poppins;
     font-size: 1.6rem;
     color: var(--color-text-base);
+    /* width: 40vw; */
+    /* max-width: 300px; */
 }
 /* ////////////////////////// */
 header, header *{
@@ -205,25 +211,37 @@ button.bt-add:active{
 
 
 
-
-
+/* Estatisticas  */
+.statistics{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.statistics p{
+    display: inline;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 1vw;
+}
+.statistics span:hover{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
 
 
   /* -------- TRADUÇÕES --------- */
-.list-translations, .translation{
-    transition: 200ms;
-} 
+
 .list-translations, .title-list{
     width: 90vw;
 }
 .list-translations{
-    overflow: scroll;
+    overflow-y: scroll;
     background-color: white;
     /* overflow-anchor: auto; */
     max-height: 500px; 
 }
 .list-translations .ajuste{
-    margin-bottom:6vh ;
+    margin-bottom:7vh ;
 }
 
 .list-translations .title-list{
@@ -237,6 +255,7 @@ button.bt-add:active{
     display: flex;
     justify-content: space-between;
     background-color: var(--color-base);
+    font-size: 1.3em;
 }
 
 .list-translations .title-list h2{
@@ -253,14 +272,18 @@ button.bt-add:active{
 .list-translations .translation{
     /* border: 1px solid #808080cc; */
     margin: 2vh 0 3vw 3vw ;
-    background-color: var(--color-background2);
+    background-color: var(--color-background);
     padding-bottom:1vh ;
     border-radius: 5px 0 0 8px;
-
+    transition: 200ms;
 }
+.list-translations .translation:hover .title-translation span.update{
+    color:white;
+}
+
 .list-translations .translation .title-translation{
     display: flex;
-    padding: 2px 4px;
+    padding: 3px 4px;
     border-radius: 5px 0 0 0;
     justify-content: space-between;
     background-color: var(--color-base-light);
@@ -295,27 +318,274 @@ button.bt-add:active{
     width: 100%;
     height: 100%;
 }
-.add-popup .add-box{
+.add-box{
+    position:absolute;
+    z-index: 7;
+    /* position: relative; */
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
-    width: 75%;
-    height: 75%;
+    width: 70%;
+    max-height: 75%;
     margin: auto;
     background-color: var(--color-background);
     border-radius: 8px;
+    border: none;
+    transition: 200ms;
+    
+}
+/* .add-popup *{
+    
+} */
+.add-box input[type='number']{
+    width:  30vw;
+    min-width: 100px;
+    text-align: center;
+}
+.add-box input,textarea{
+    padding: 5px;
+    border-radius: 5px;
 }
 
-.add-popup .add-box header{
+.add-box header{
+    position: fixed;
+    display: flex;
+    /* top:0; */
+    z-index: 8;
     font-size: 0.8em;
-    width: 100%;
+    width: 70%;
+    
     border-radius: 8px 8px 0 0 ;
-    background-color: var(--color-primary);
+    background-color: var(--color-base);
     padding: 2px 8px;
     margin-bottom: 5vh;
+    padding: 8px;
+    color: white;
+    justify-content: space-between;
+}
+.add-box header h2{
+    margin-right: 20px;
 }
 
-.add-popup fieldset{
-    width: 100%;
-    border: none;
-    padding: 8px;
+
+.add-box form{
+    padding: 0 8px;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+
 }
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.field-group{
+    display: flex;
+    flex-direction: row;
+}
+details{
+    margin: 3vh 0;
+    display: flex;
+    /* padding: 1vh 2vw; */
+    flex-direction: column;
+    align-self: center;
+    justify-content: left;
+    background-color: white;
+    border-radius: 5px;
+}
+details input{
+    width: 15px;
+    margin:1vh 1vw;
+}
+.add-box label:not(details label){
+    font-weight: bold;
+    margin: 5px;
+}
+details summary{
+    padding: 3px 5px;
+    font-weight: bold;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-base-light);
+    color: white;
+}
+details .field{
+    font-weight: 500;
+}
+
+details summary input{
+    margin: 0;
+    width: 15px;
+}
+.add-box .ajuste{
+    margin-bottom: 10vh;
+}
+
+.add-box  form textarea{
+    margin: 0 5vw ;
+    width: 80%;
+    text-align: center;
+}
+
+.add-box .date-time label, .date-time input{
+    margin-top: 3px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+.add-box input[type='date']{
+    /* background-color: red; */
+    width: 25vw;
+    min-width: 152px;
+    padding: 0;
+}
+
+.add-box input[type='time']{
+    /* background-color: red; */
+    width: 10vw;
+    min-width: 60px;
+    padding: 0;
+}
+
+.add-box input[type='submit']{
+    display: block;
+    margin: 1vh auto 3vh;
+    padding: 3px;
+    max-width: 200px;
+    background-color: var(--color-primary);
+    box-shadow: 2px 5px 5px;
+}
+.add-box input[type='submit']:hover{
+    background-color: var(--color-pri-light);
+    
+}
+.add-box input[type='submit']:active{
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px;
+    margin-bottom: 3vh-5px;
+}
+/* /////////////////////////////// */
+
+/* .translation:hover:active{
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80vw;
+    height: 40vh;
+    transform: translate(10px,2px);
+    border-radius: 10px 20px 40px 100px;
+} */
+
+/* //////  MENU    //////// */
+.menu-op{
+    position: fixed;
+    right: 0;
+    z-index: 7;
+    top: 8vh;
+    background-color: var(--color-background);
+    border-radius: 5px;
+    border: 1px solid black;
+     
+    box-shadow: 1px 2px 5px black;
+    transform: scaleY(0);
+    transition: bottom 500ms, linear 200ms;
+}
+div.focused{
+    transform: translateY(-10%) scaley(1);
+}
+.menu-op > ul,li{
+    list-style-type: none;
+}
+.menu-op li{
+    margin: 5px 0;
+    padding: 3px 3px 3px 10px;
+}
+.menu-op li:hover{
+    padding: 2px 2px 2px 9px;
+    border: 1px solid var(--color-background2);
+    font-weight: bold;
+}
+
+
+.triangle-up{
+    position: relative;
+    z-index: 4;
+    top: -10px;
+    right: -35%;
+    width: 0; 
+    height: 0;    
+    /* left:30vw; */
+    /* justify-content: center; */
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--color-background);
+}
+/* ------------SEARCH BAR---------------------- */
+.search-bar{
+    box-shadow: 2px 2px 5px black;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    left: 10px;
+    top:90vh;
+    background-color: var(--color-background2);
+    padding: 8px;
+    border-radius: 20px;
+    transition: 200ms;
+
+    transition: width 500ms, linear 200ms;
+}
+.search-bar:active{
+    box-shadow: 0px 0px 0px black;
+    transform: translateY(5px);
+
+}
+
+.search-bar input{
+    display: none;
+    height: 20px;
+    width: 0px;
+    padding: 20px;
+    border:none;
+    border-radius: 5px;
+    transform: scaleX(0);
+}
+
+.search-bar button{
+    position: relative;
+    z-index: 2;
+    /* left: -40px; */
+    background-color: var(--color-pri-light);
+    background-image: url('/img/search.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid greenyellow;
+}
+
+.search-bar.focused{
+    border-radius: 8px;
+    left: 10px;
+    top:11vh;
+}
+.search-bar.focused button{
+    transform: translateX(-40px);
+    border-radius: 5px;
+}
+.search-bar.focused > button:active{
+    background-color: greenyellow;
+}
+.search-bar.focused input{
+    display: flex;
+    width: 30vw;
+    min-width: 200px;
+    transform: scaleX(1);
+}
+
