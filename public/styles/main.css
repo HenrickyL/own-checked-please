@@ -253,6 +253,7 @@ button.bt-add:active{
     padding: 1vh 2vw;
     border-radius: 8px 8px 0 0;
     display: flex;
+   
     justify-content: space-between;
     background-color: var(--color-base);
     font-size: 1.3em;
@@ -260,6 +261,8 @@ button.bt-add:active{
 
 .list-translations .title-list h2{
     color: white;
+    display:flex;
+    flex-direction:row;
 }
 .list-translations .title-list span.qtd{
     margin-right: 3vw;
