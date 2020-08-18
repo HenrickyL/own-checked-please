@@ -3,6 +3,7 @@ import express from 'express'
 
 const app = express()
 
+
 import nunjucks from 'nunjucks'
 nunjucks.configure("src/views",{
     express: app,

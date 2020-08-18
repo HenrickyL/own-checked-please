@@ -77,51 +77,46 @@
         
         <fieldset class="add-box hide">
             <header>
-                <h2>Adicionar compra:</h2>
+                <h2>Adicionar Nova Conta:</h2>
                 <h2 id="date-now"></h2>
             </header>
             <form  >
                 <div class="ajuste"></div>
                 <div class="field">
-                    <label for="valor">Valor da compra</label>
-                    <input id="buy-value" type="number" min="0" step="0.05" placeholder="R$" required/>
+                    <label for="bill-title">Titulo da conta</label>
+                    <input id="bill-title" type="text" required/>
                 </div>
                 <div class="personalize">
                     <details class="add-category" >
                         <summary>
-                            <span>Categoria:</span>
-                            <input type="checkbox" name="add-category" id="add-category">
+                            <span>Periodo:</span>
+                            <input type="checkbox" name="add-period" id="add-period">
                         </summary>
                         <div class="field-group">
-                            <input type="radio" name="category" id="food" >
-                            <label for="food">Alimentação</label> 
+                            <input type="radio" name="period" id="15days" >
+                            <label for="15days">15 Dias</label> 
                         </div>
                         <div class="field-group">
-                            <input type="radio" name="category" id="transport" >
-                            <label for="transport">Transport</label> 
+                            <input type="radio" name="period" id="1-month" >
+                            <label for="1-month">1 Mês</label> 
                         </div>
                     </details>
                     <details class="add-status">
                     <summary>
-                        <span>Data Personalidada?</span> 
-                        <input type="checkbox" name="date-edit" id="date-edit">
+                        <span>Definir Limite:</span> 
+                        <input type="checkbox" name="value-limit" id="value-limit">
                     </summary>
                     
                     <div class="field-group date-time">
                         <div class="field">
-                            <label for="date">Data:</label>
-                            <input type="date"  name="date" id="date">
-                            
-                        </div>
-                        <div class="field">
-                            <label for="time">Hora:</label>
-                            <input type="time" placeholder="date" name="time" id="time">
+                            <label for="date">Limite:</label>
+                            <input type="number" min="0" name="max-value" id="max-value">
                             
                         </div>
                     </div>
                     </details>
                 </div> 
-                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10" required></textarea>
+                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10"></textarea>
                 <input type="submit" value="Adicionar" id="add-submit">
             </form>
         </fieldset>
@@ -144,6 +139,6 @@
         </div>
 
 
-        <script type="module" src="/scripts/buys.js"></script>
+        <script type="module" src="/scripts/month.js"></script>
     </main>
 </body>

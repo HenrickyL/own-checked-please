@@ -246,7 +246,7 @@ button.bt-add:active{
 
 .list-translations .title-list{
     box-shadow: 0px 2px 7px black;
-    position: fixed;
+    position: absolute;
     
     z-index: 3;
     /* top: 7vh; */
