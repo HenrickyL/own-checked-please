@@ -29,7 +29,7 @@ export function loadButons(){
 }
 export function activateButtons(){
     btReturn.addEventListener("click",()=>{
-        window.location = "/"
+        window.location = "/month"
     })
     
     btOp.addEventListener('focus',()=>{

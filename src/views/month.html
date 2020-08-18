@@ -6,6 +6,7 @@
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/buys.css">
+    <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/styles/month.css">
     <link rel="stylesheet" href="/styles/responsive.css">
     <title>Contas</title>
@@ -13,7 +14,7 @@
 <body id="page-monitor" class="view">
     <header>
         <div class="head-bar">
-            <button class="bt-return"><img src="/img/arrow-left.svg" alt=""></button>
+            <button class="bt-return hide"><img src="/img/arrow-left.svg" alt=""></button>
             <div class="triangle-box">
                 <img id="logo" src="/img/own_read.png" alt="logo">
                 <div class="triangle">
@@ -80,7 +81,8 @@
                 <h2>Adicionar Nova Conta:</h2>
                 <h2 id="date-now"></h2>
             </header>
-            <form  >
+            
+            <form action="" method="POST" >
                 <div class="ajuste"></div>
                 <div class="field">
                     <label for="bill-title">Titulo da conta</label>
@@ -139,6 +141,36 @@
         </div>
 
 
-        <script type="module" src="/scripts/month.js"></script>
+
     </main>
+     <!-- antigo index -->
+     <!-- <div class="introduction" id="app-home">
+        <div id="conectivity">
+            <button id="color-status" alt="conecção" class="disconected"></button>
+        </div>
+    
+        <main id="app-home-views">
+    
+            <h1 alt="titulo">Own</h1>
+            <h3 alt="sub-titulo">Cheked please</h3>
+      
+            <img id="main-logo"  src="/img/logo.png" alt="Logo colorida">
+            <p>Seu APP de gerenciamento de compras.</p>
+            
+            <div>
+                <button class="button-sec" alt="botao contas">Contas</button>
+                <button class="button-main" alt="botao compras" href="">compras</button>
+            </div>
+    
+    
+        </main>
+    </div>
+    <script>
+        let intro=document.querySelector("app-home")
+        setTimeout(()=>{
+            intro.classList.add("hiding")
+        },200)
+    </script>  -->
+
+    <script type="module" src="/scripts/month.js"></script>
 </body>

@@ -63,3 +63,14 @@ button.bt-return:hover, .bt-options:hover{
 .search-bar.focused > button:active{
     background-color: lightsteelblue;
 }
+
+
+/* personalizando o bill */
+
+.add-box header{
+    background-color: var(--color-primary);
+}
+
+details summary{
+    background-color: var(--color-pri-light);
+}

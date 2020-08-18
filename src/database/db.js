@@ -1,24 +1,24 @@
 import sqlite3 from 'sqlite3'
 
-const db = new sqlite3.Database(/*"./src/database/*/"database.db")
+export const db = new sqlite3.Database(/*"./src/database/*/"database.db")
 
 const tables=[
     {
         title:"category",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
-            name:'VARCHAR(45) NOT NULL',
+            id:'INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL',
+            name:'VARCHAR(45)',
             fkey:[]
         }
     },
     {
         title:"buy",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
-            name:'VARCHAR(45)',
-            value: 'FLOAT NOT NULL',
-            buyDate:'DATE NOT NULL',
+            id:' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+            value: 'FLOAT ',
+            buyDate:'DATE ',
             description:'TEXT',
+            category_id:'INTEGER',
             fkey:['category']
         }
     },
@@ -26,7 +26,7 @@ const tables=[
     {
         title:"period",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
             type:'VARCHAR(45) NOT NULL',
             fkey:[]
         }
@@ -35,7 +35,7 @@ const tables=[
     {
         title:"status",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
             name:'VARCHAR(45) NOT NULL',
             fkey:[]
         }
@@ -44,13 +44,15 @@ const tables=[
     {
         title:"bill",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
             title:'VARCHAR(45)',
             dateCreate: 'DATE NOT NULL',
             dateEnded:'DATE',
             valueSum:'FLOAT',
             valueLimit:'FLOAT',
             description:'TEXT',
+            status_id: 'INTEGER',
+            period_id: 'INTEGER',
             fkey:['status','period']
             
         }
@@ -58,22 +60,24 @@ const tables=[
     {
         title:"have",
         body:{
-            id:'INTEGER auto_increment NOT NULL',
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
             name:'VARCHAR(45)',
+            bill_id:'INTEGER',
+            buy_id:'INTEGER',
             fkey:['bill','buy'/*,'user'*/]
         }
     },
     
     //* rever a tabela user
-    {
-        title:"user",
-        body:{
-            id:'INTEGER auto_increment NOT NULL',
-            username:'VARCHAR(25) ',
-            password:'VARCHAR(12) ',
-            fkey:[]
-        }
-    },
+    // {
+    //     title:"user",
+    //     body:{
+    //         id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+    //         username:'VARCHAR(25) ',
+    //         password:'VARCHAR(12) ',
+    //         fkey:[]
+    //     }
+    // },
 
 ]
 
@@ -89,7 +93,7 @@ function getBody(t){
         if(i!=='fkey')
             text += ` ${i}  ${t.body[i]},\n`
     }
-    text+= `PRIMARY KEY (${id}),\n`
+    // text+= `PRIMARY KEY (${id}),\n`
     if(t.body.fkey.length>0){
         for(let i of t.body.fkey)
             text+= `FOREIGN KEY (id)
@@ -115,13 +119,43 @@ db.serialize(() => {
         `)
         console.log('Tabela <',t.title,'> Criada!')
     })
-    // db.run(`INSERT INTO user(
-    //     username,password
-    // )values(
-    //     "admin","admin"
-    //     );
-    // `)
+   
+    const query = `INSERT INTO category(name) VALUES(?);`       
+    const values = ["Transporte" ]
+    function afterInsertData(err){
+            if(err){
+                    return console.log(err)
+            } 
+            console.log("Cadastrado com sucesso!")
+            console.log(this) 
+            
+            ////////////////////////////
+             db.all(`SELECT * FROM category `, (err,rows)=>{
+                    if(err){
+                        return console.log(err)
+                    } 
+                    console.log("Aqui estão os Registros:")
+                    console.log(rows)
+                })
 
+
+    }
+
+    db.run(query, values, afterInsertData)
 
     console.log("base de dados criada!")
 })
+
+
+
+
+
+
+
+
+export default {db}
+
+
+
+
+

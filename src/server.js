@@ -1,5 +1,5 @@
 import express from 'express'
-
+// import {db} from './database/db.js'
 
 const app = express()
 
@@ -26,8 +26,18 @@ app.get('/buys',(req, res)=>{
 })
 
 app.get('/month',(req, res)=>{
+    // db.all(`SELECT * FROM category `, (err,rows)=>{
+    //     if(err){
+    //         return console.log(err)
+    //     } 
+    //     console.log("Aqui estão os Registros:")
+    //     console.log(rows)
+    // })
     return res.render("month.html")
 })
+// app.post('/savebill',(req, res){
+
+// }
 
 
 app.get("/*",(req, res)=>{

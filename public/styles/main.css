@@ -353,10 +353,11 @@ button.bt-add:active{
 .add-box header{
     position: fixed;
     display: flex;
-    /* top:0; */
+    /* top:20vh; */
     z-index: 8;
     font-size: 0.8em;
     width: 70%;
+    min-width: 325px;
     
     border-radius: 8px 8px 0 0 ;
     background-color: var(--color-base);
@@ -591,4 +592,18 @@ div.focused{
     min-width: 200px;
     transform: scaleX(1);
 }
-
+.hiding{
+    opacity: 0;
+    display:none;
+}
+/*olha o wpp*/
+.introduction{
+    opacity: 1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    transition: 600ms;
+}
