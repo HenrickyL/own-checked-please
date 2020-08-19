@@ -114,7 +114,7 @@ app.post('/savebuy',(req, res)=>{
                 return res.send("Erro ao inserir os dados")
             }
 
-            return res.redirect(301,'/buys/true')
+            return res.redirect(301,'/buys')
 
         })
 })
