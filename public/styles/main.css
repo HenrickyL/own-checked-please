@@ -150,7 +150,7 @@ button.bt-options{
 
 }
 button.bt-add{
-    position: absolute;
+    position: fixed;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -238,7 +238,7 @@ button.bt-add:active{
     overflow-y: scroll;
     background-color: white;
     /* overflow-anchor: auto; */
-    max-height: 500px; 
+    max-height: 400px; 
 }
 .list-translations .ajuste{
     margin-bottom:7vh ;
@@ -304,6 +304,7 @@ button.bt-add:active{
     background-image: linear-gradient(var(--color-pri-light),white);
     font-weight: bold;
     box-shadow: 1px 1px 5px gray;
+    transform: translateX(-8px);
 }
 
 
@@ -322,7 +323,7 @@ button.bt-add:active{
     height: 100%;
 }
 .add-box{
-    position:absolute;
+    position:fixed;
     z-index: 7;
     /* position: relative; */
     overflow-y: scroll;
@@ -531,7 +532,7 @@ div.focused{
 /* ------------SEARCH BAR---------------------- */
 .search-bar{
     box-shadow: 2px 2px 5px black;
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -606,4 +607,26 @@ div.focused{
     top: 0;
     left: 0;
     transition: 600ms;
+}
+.grid-colum{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.sucefull{
+    position: fixed;
+    top: 20vh;
+    justify-content: center;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40vw;
+    height: 40vh;
+    border: 2px solid var(--color-especial);
+    box-shadow: 3px 2px 5px greenyellow;
+    background-color: white;
+    transition: 400ms;
+    border-radius: 30%;
 }

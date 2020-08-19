@@ -1,13 +1,21 @@
 import sqlite3 from 'sqlite3'
+import * as fs from 'fs'
+sqlite3.verbose()
+export const db = new sqlite3.Database("./src/database/database.db")
+// export const db = new sqlite3.Database("./src/database/database.db")
 
-export const db = new sqlite3.Database(/*"./src/database/*/"database.db")
+let init = false
+
+
+
+
 
 const tables=[
     {
         title:"category",
         body:{
-            id:'INTEGER  PRIMARY KEY AUTOINCREMENT NOT NULL',
-            name:'VARCHAR(45)',
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+            type:'TEXT UNIQUE',
             fkey:[]
         }
     },
@@ -15,8 +23,8 @@ const tables=[
         title:"buy",
         body:{
             id:' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            value: 'FLOAT ',
-            buyDate:'DATE ',
+            value: 'FLOAT',
+            buyDate:'DATE',
             description:'TEXT',
             category_id:'INTEGER',
             fkey:['category']
@@ -27,7 +35,8 @@ const tables=[
         title:"period",
         body:{
             id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            type:'VARCHAR(45) NOT NULL',
+            name:'TEXT',
+            periodTime:'INTEGER',
             fkey:[]
         }
     },
@@ -36,7 +45,7 @@ const tables=[
         title:"status",
         body:{
             id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            name:'VARCHAR(45) NOT NULL',
+            type:'TEXT',
             fkey:[]
         }
     },
@@ -110,8 +119,23 @@ function getBody(t){
     return text.slice(0,text.length-2)
 }
 
-
+const Categorie = ['Transporte','Alimentação','Lazer','Saúde','Aluguel','Nenhuma']
+const Periods = [ ['uma semana',7], ['quinze dias',15],['um mês',30],['três meses',90],['seis meses',120],['um ano',365] ,['indefinido',-1]]
+const Status = ['ativo','fechado','pago' ]
 db.serialize(() => {
+    //verificação se existe o database
+    // try {
+    //     if (fs.existsSync('./src/database/database.db')) {
+    //       init=false
+    //     }else init =true
+    //   } catch(err) {
+    //     console.error(err)
+    //   }
+
+
+
+
+
     tables.forEach(t=>{
         db.run(`CREATE TABLE IF NOT EXISTS ${t.title}(
                 ${getBody(t)}
@@ -119,36 +143,42 @@ db.serialize(() => {
         `)
         console.log('Tabela <',t.title,'> Criada!')
     })
-   
-    const query = `INSERT INTO category(name) VALUES(?);`       
-    const values = ["Transporte" ]
-    function afterInsertData(err){
-            if(err){
-                    return console.log(err)
-            } 
-            console.log("Cadastrado com sucesso!")
-            console.log(this) 
-            
-            ////////////////////////////
-             db.all(`SELECT * FROM category `, (err,rows)=>{
-                    if(err){
-                        return console.log(err)
-                    } 
-                    console.log("Aqui estão os Registros:")
-                    console.log(rows)
-                })
-
-
+    
+    
+    //estados iniciais
+    if(!init){
+        //criar as categorias
+       Categorie.forEach(c=>{
+           let query= `INSERT INTO category(type) VALUES(?)`
+           let values = [c]
+           db.run(query,values,(err)=>{
+               console.log(err)
+           })
+       })
+       //criar os status
+       Status.forEach(s=>{
+            let query= `INSERT INTO status(type) VALUES(?)`
+            let values = [s]
+            db.run(query,values,(err)=>{
+                console.log(err)
+            })
+        })
+       //criar os Periodos
+       Periods.forEach(p=>{
+            let query= `INSERT INTO period(name,periodTime) VALUES(?,?)`
+            let values = [p[0],p[1]]
+            db.run(query,values,(err)=>{
+                console.log(err)
+            })
+        })
+        init =true
+       console.log(":: Estado padrão criado ::")
     }
-
-    db.run(query, values, afterInsertData)
-
+    // db.run(`INSERT INTO category(id,name) VALUES(1,"Aluguel");`)
+    
+    // db.close();
     console.log("base de dados criada!")
 })
-
-
-
-
 
 
 

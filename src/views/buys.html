@@ -6,6 +6,7 @@
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/buys.css">
+    <link rel="stylesheet" href="/styles/animation.css">
     <link rel="stylesheet" href="/styles/responsive.css">
     <title>Compras</title>
 </head>
@@ -44,22 +45,17 @@
                 <h2>Compras de <div class="buys-month"> Agosto</div>:</h2><span class="qtd">Total:</span>
             </summary>
             
-        
+        {% for b in buys %}
             <div class="translation">
                 <div class="title-translation" >
-                    <h3>data</h3><span class="update">Preço</span>
+                    <h3>{{b.buyDate}}</h3><span class="update">R$ {{b.value}}</span>
                 </div>
-                <span>Valor</span>
+                <span>{{b.description}}</span>
                 <div class="buy-category"></div>
             </div>
 
-            <div class="translation">
-                <div class="title-translation" >
-                    <h3>data</h3><span class="update">Preço</span>
-                </div>
-                <span>Valor</span>
-                <div class="buy-category"></div>
-            </div>  
+        {% endfor %}
+
         
        
         </details>
@@ -73,51 +69,66 @@
                 <h2>Adicionar compra:</h2>
                 <h2 id="date-now"></h2>
             </header>
-            <form  >
+            <form  action="/savebuy" method="POST" >
                 <div class="ajuste"></div>
                 <div class="field">
                     <label for="valor">Valor da compra</label>
-                    <input id="buy-value" type="number" min="0" step="0.05" placeholder="R$" required/>
+                    <input id="buy-value" type="number" name="valor" min="0" step="0.05" placeholder="R$" required/>
                 </div>
                 <div class="personalize">
                     <details class="add-category" >
                         <summary>
                             <span>Categoria:</span>
-                            <input type="checkbox" name="add-category" id="add-category">
+                            <div></div>
                         </summary>
-                        <div class="field-group">
-                            <input type="radio" name="category" id="food" >
-                            <label for="food">Alimentação</label> 
+                        <div class='grid-colum'>
+                            {% for c in categories %}
+                            <div class="field-group ">
+                                <input type="radio" name="category" id='{{c.type}}' value="{{c.id}}" {% if (c.type== 'Nenhuma') %}
+                                checked
+                                {% endif %} >
+                                <label for="{{c.type}}">{{c.type}}</label> 
+                            </div>
+                        {% endfor %}
                         </div>
-                        <div class="field-group">
-                            <input type="radio" name="category" id="transport" >
-                            <label for="transport">Transporte</label> 
-                        </div>
+                        
+                        
                     </details>
                     <details class="add-status">
                     <summary>
                         <span>Data Personalidada?</span> 
-                        <input type="checkbox" name="date-edit" id="date-edit">
+                        <div></div>
+                        <!-- <input type="checkbox" name="date-edit" id="date-edit"> -->
                     </summary>
                     
                     <div class="field-group date-time">
                         <div class="field">
                             <label for="date">Data:</label>
-                            <input type="date"  name="date" id="date">
+                            <input type="date"  name="date" id="add-date">
                             
                         </div>
                         <div class="field">
                             <label for="time">Hora:</label>
-                            <input type="time" placeholder="date" name="time" id="time">
+                            <input type="time" placeholder="date"  name="time" id="add-time">
                             
                         </div>
                     </div>
                     </details>
                 </div> 
-                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10" required></textarea>
+                <textarea name="description" placeholder="Detalhes" id="buy-description" cols="30" rows="10" required></textarea>
                 <input type="submit" value="Adicionar" id="add-submit">
             </form>
         </fieldset>
+        <!-- <div class="sucefull">
+            <div class="check_mark">
+            <div class="sa-icon sa-success animate">
+                <span class="sa-line sa-tip animateSuccessTip"></span>
+                <span class="sa-line sa-long animateSuccessLong"></span>
+                <div class="sa-placeholder"></div>
+                <div class="sa-fix"></div>
+            </div>
+            </div>
+        </div> -->
 
         <div class="menu-op">
             <div class="triangle-box">
@@ -140,6 +151,18 @@
 
 
 
-        <script type="module" src="/scripts/buys.js"></script>
     </main>
+    <!-- <script>
+    let sucess= document.querySelector('.sucefull')
+    let bg= document.querySelector('.add-popup')
+    if({{ added }}){
+        sucess.classList.remove('hide')
+        bg.classList.remove('hide')
+        setTimeout(()=>{
+            sucess.classList.add('hide')
+            bg.classList.add('hide')
+        },1500)
+    }
+    </script> -->
+    <script type="module" src="/scripts/buys.js"></script>
 </body>

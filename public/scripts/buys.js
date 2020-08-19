@@ -13,6 +13,8 @@ window.addEventListener("load",()=>{
        let elemen = [d,v]
        /////////////////////
        let dateNow = document.querySelector("#date-now")
+       let addDate = document.getElementById("add-date")
+       let addTime = document.getElementById("add-time")
     header.activateButtons()
         elemen.forEach(elem=>{
             elem.addEventListener("blur",event=>{
@@ -37,6 +39,9 @@ window.addEventListener("load",()=>{
         add.addEventListener("click",()=>{
             let d = new Date()
             dateNow.textContent = `${leftpad(d.getDate())}/${leftpad(d.getMonth()+1)} - ${leftpad(d.getHours())}:${leftpad(d.getMinutes())}`
+            addDate.value = `${leftpad(d.getFullYear())}-${leftpad(d.getMonth()+1)}-${leftpad(d.getDate())}`
+            addTime.value = `${leftpad(d.getHours())}:${ leftpad(d.getMinutes())}`
+            console.log(">>",addTime)
             popup.classList.remove("hide")
             addBox.classList.remove("hide")
         })
