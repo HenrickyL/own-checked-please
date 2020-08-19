@@ -11,6 +11,43 @@ let init = false
 
 
 const tables=[
+    
+    {
+        title:"period",
+        body:{
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+            name:'TEXT',
+            periodTime:'INTEGER',
+            fkey:[]
+        }
+    },
+    
+    {
+        title:"status",
+        body:{
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+            type:'TEXT',
+            fkey:[]
+        }
+    },
+    
+    {
+        title:"bill",
+        body:{
+            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+            title:'VARCHAR(45)',
+            dateCreate: 'DATE',
+            dateEnded:'DATE',
+            countBuys: 'INTEGER',
+            valueSum:'FLOAT',
+            valueLimit:'FLOAT',
+            description:'TEXT',
+            status_id: 'INTEGER',
+            period_id: 'INTEGER',
+            fkey:['status','period']
+            
+        }
+    },
     {
         title:"category",
         body:{
@@ -27,55 +64,20 @@ const tables=[
             buyDate:'DATE',
             description:'TEXT',
             category_id:'INTEGER',
-            fkey:['category']
+            bill_id: 'INTEGER',
+            fkey:['category','bill']
         }
     },
-
-    {
-        title:"period",
-        body:{
-            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            name:'TEXT',
-            periodTime:'INTEGER',
-            fkey:[]
-        }
-    },
-
-    {
-        title:"status",
-        body:{
-            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            type:'TEXT',
-            fkey:[]
-        }
-    },
-
-    {
-        title:"bill",
-        body:{
-            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            title:'VARCHAR(45)',
-            dateCreate: 'DATE NOT NULL',
-            dateEnded:'DATE',
-            valueSum:'FLOAT',
-            valueLimit:'FLOAT',
-            description:'TEXT',
-            status_id: 'INTEGER',
-            period_id: 'INTEGER',
-            fkey:['status','period']
-            
-        }
-    },
-    {
-        title:"have",
-        body:{
-            id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
-            name:'VARCHAR(45)',
-            bill_id:'INTEGER',
-            buy_id:'INTEGER',
-            fkey:['bill','buy'/*,'user'*/]
-        }
-    },
+    // {
+    //     title:"have",
+    //     body:{
+    //         id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
+    //         name:'VARCHAR(45)',
+    //         bill_id:'INTEGER',
+    //         buy_id:'INTEGER',
+    //         fkey:['bill','buy'/*,'user'*/]
+    //     }
+    // },
     
     //* rever a tabela user
     // {
@@ -145,38 +147,38 @@ db.serialize(() => {
     })
     
     
-    //estados iniciais
-    if(!init){
-        //criar as categorias
-       Categorie.forEach(c=>{
-           let query= `INSERT INTO category(type) VALUES(?)`
-           let values = [c]
-           db.run(query,values,(err)=>{
-               console.log(err)
-           })
-       })
-       //criar os status
-       Status.forEach(s=>{
-            let query= `INSERT INTO status(type) VALUES(?)`
-            let values = [s]
-            db.run(query,values,(err)=>{
-                console.log(err)
-            })
-        })
-       //criar os Periodos
-       Periods.forEach(p=>{
-            let query= `INSERT INTO period(name,periodTime) VALUES(?,?)`
-            let values = [p[0],p[1]]
-            db.run(query,values,(err)=>{
-                console.log(err)
-            })
-        })
-        init =true
-       console.log(":: Estado padrão criado ::")
-    }
-    // db.run(`INSERT INTO category(id,name) VALUES(1,"Aluguel");`)
+    // //estados iniciais
+    // if(!init){
+    //     //criar as categorias
+    //    Categorie.forEach(c=>{
+    //        let query= `INSERT INTO category(type) VALUES(?)`
+    //        let values = [c]
+    //        db.run(query,values,(err)=>{
+    //            console.log(err)
+    //        })
+    //    })
+    //    //criar os status
+    //    Status.forEach(s=>{
+    //         let query= `INSERT INTO status(type) VALUES(?)`
+    //         let values = [s]
+    //         db.run(query,values,(err)=>{
+    //             console.log(err)
+    //         })
+    //     })
+    //    //criar os Periodos
+    //    Periods.forEach(p=>{
+    //         let query= `INSERT INTO period(name,periodTime) VALUES(?,?)`
+    //         let values = [p[0],p[1]]
+    //         db.run(query,values,(err)=>{
+    //             console.log(err)
+    //         })
+    //     })
+    //     init =true
+    //    console.log(":: Estado padrão criado ::")
+    // }
+
     
-    // db.close();
+
     console.log("base de dados criada!")
 })
 

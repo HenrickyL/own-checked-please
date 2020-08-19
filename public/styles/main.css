@@ -14,6 +14,7 @@
 }
 .hide{
     transform: scale(0);
+    display: none;
     
 }
 *{
@@ -234,6 +235,8 @@ button.bt-add:active{
 .list-translations, .title-list{
     width: 90vw;
 }
+
+
 .list-translations{
     overflow-y: scroll;
     background-color: white;
@@ -291,6 +294,13 @@ button.bt-add:active{
     justify-content: space-between;
     background-color: var(--color-base-light);
     margin-bottom: 10px;
+}
+
+.title{
+    font-size: 0.9em;
+}
+.translation:hover  .title{
+    color: white;
 }
 .list-translations .translation .title-translation span.update{
     color: #707070;
@@ -626,7 +636,7 @@ div.focused{
     height: 40vh;
     border: 2px solid var(--color-especial);
     box-shadow: 3px 2px 5px greenyellow;
-    background-color: white;
+    background-color: var(--color-background);
     transition: 400ms;
     border-radius: 30%;
 }

@@ -10,6 +10,10 @@ window.addEventListener("load",()=>{
         let submit = document.getElementById("add-submit")
         /////////////////////
         let dateNow = document.querySelector("#date-now")
+
+        //poder clicar nos bills
+        let allBills = Array.from(document.querySelectorAll('.translation'))
+
     /////////////////////////////////////////////////////////////
     header.activateButtons()
     //////////////////////////////////////////////////////////////
@@ -25,6 +29,14 @@ window.addEventListener("load",()=>{
             addBox.classList.add("hide")
             popup.classList.add("hide")
         })   
+
+
+        //click na bill
+        allBills.forEach(b=>{
+            b.addEventListener("click",()=>{
+                window.location = "/buys/"+b.childNodes[7].textContent
+            })
+        })
         
     console.log("<Page Loaded!>")
 

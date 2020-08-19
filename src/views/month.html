@@ -6,7 +6,7 @@
     <link rel="icon" href="/img/logo.png">
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/buys.css">
-    <link rel="stylesheet" href="/styles/index.css">
+    <!-- <link rel="stylesheet" href="/styles/index.css"> -->
     <link rel="stylesheet" href="/styles/month.css">
     <link rel="stylesheet" href="/styles/responsive.css">
     <title>Contas</title>
@@ -52,22 +52,19 @@
                 <h2>Contas:</h2><span class="qtd">Total:</span>
             </summary>
             
-        
-            <div class="translation">
-                <div class="title-translation" >
-                    <h3>data</h3><span class="update">Preço</span>
+            {% for b in bills %}
+                <div class="translation">
+                    <div class="title-translation" >
+                        <h3>{{b.dateCreate}}</h3> <h2 class="title"> {{b.title}}</h2>  <span class="update">R$ {{b.valueSum}}</span>
+                        
+                    </div>
+                    <span>{{b.description}}</span>
+                    <div class="buy-category"></div>
+                    <div class='billId hide'>{{b.id}}</div>
                 </div>
-                <span>Valor</span>
-                <div class="buy-category"></div>
-            </div>
+            {% endfor %}
 
-            <div class="translation">
-                <div class="title-translation" >
-                    <h3>data</h3><span class="update">Preço</span>
-                </div>
-                <span>Valor</span>
-                <div class="buy-category"></div>
-            </div>  
+           
         
        
         </details>
@@ -82,43 +79,50 @@
                 <h2 id="date-now"></h2>
             </header>
             
-            <form action="" method="POST" >
+            <form action="/savebill" method="POST" >
                 <div class="ajuste"></div>
                 <div class="field">
-                    <label for="bill-title">Titulo da conta</label>
-                    <input id="bill-title" type="text" required/>
+                    <label for="billtitle">Titulo da conta</label>
+                    <input id="billtitle" name='billtitle'  type="text" required/>
                 </div>
                 <div class="personalize">
                     <details class="add-category" >
                         <summary>
                             <span>Periodo:</span>
-                            <input type="checkbox" name="add-period" id="add-period">
+                            <div></div>
+                            <!-- <input type="checkbox" name="addPeriod" id="add-period"> -->
                         </summary>
-                        <div class="field-group">
-                            <input type="radio" name="period" id="15days" >
-                            <label for="15days">15 Dias</label> 
+                        <div class='grid-colum'>
+                            {% for p in periods %}
+                            <div class="field-group">
+                                <input type="radio" name="period" id='{{p.name}}' value='{{p.id}}' {% if (p.name == 'um mês') %}
+                                checked
+                                {% endif %}>
+                                <label for="{{p.name}}">{{p.name}}</label> 
+                            </div>
+                            {% endfor %}
                         </div>
-                        <div class="field-group">
-                            <input type="radio" name="period" id="1-month" >
-                            <label for="1-month">1 Mês</label> 
-                        </div>
+                        
                     </details>
                     <details class="add-status">
                     <summary>
                         <span>Definir Limite:</span> 
-                        <input type="checkbox" name="value-limit" id="value-limit">
+                        <div></div>
+                        {# <input type="checkbox" name="valueLimit" id="value-limit"> #}
                     </summary>
-                    
+                    <div>
+
+                    </div>
                     <div class="field-group date-time">
                         <div class="field">
                             <label for="date">Limite:</label>
-                            <input type="number" min="0" name="max-value" id="max-value">
+                            <input type="number" min="0" placeholder='R$' name="limit" id="max-value">
                             
                         </div>
                     </div>
                     </details>
                 </div> 
-                <textarea name="Description" placeholder="Detalhes" id="buy-description" cols="30" rows="10"></textarea>
+                <textarea name="description" placeholder="Detalhes" id="buy-description" cols="30" rows="10"></textarea>
                 <input type="submit" value="Adicionar" id="add-submit">
             </form>
         </fieldset>

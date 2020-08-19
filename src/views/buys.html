@@ -25,7 +25,10 @@
     <main id="page-monitor-views">
         <header class="monitor-box">
             <div class="statistics">
-                <span>Resultados:</span>
+                <span>Resultados: <b>{{buys.length}}</b></span>
+                <span>limite: <b>R${{thisBill.valueLimit}}</b></span>
+                <span>Vencimento: <b></b></span>
+
             </div>
             <div class="filter-options" alt="filto">
                 <label for="filter">Filtrar por:</label>
@@ -42,7 +45,7 @@
         <details class="list-translations" open>
             <div class="ajuste"></div>
             <summary class="title-list" alt="Lista de traduções">
-                <h2>Compras de <div class="buys-month"> Agosto</div>:</h2><span class="qtd">Total:</span>
+                <h2><div class="buys-month"> {{thisBill.title}}</div></h2><span class="qtd">R${{thisBill.valueSum}}</span>
             </summary>
             
         {% for b in buys %}
@@ -69,7 +72,7 @@
                 <h2>Adicionar compra:</h2>
                 <h2 id="date-now"></h2>
             </header>
-            <form  action="/savebuy" method="POST" >
+            <form  action="/savebuy/{{thisBill.id}}" method="POST" >
                 <div class="ajuste"></div>
                 <div class="field">
                     <label for="valor">Valor da compra</label>
