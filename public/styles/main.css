@@ -392,7 +392,7 @@ button.bt-add:active{
 
 .add-box form{
     padding: 0 8px;
-    display: block;
+    display: block; 
     flex-direction: column;
     align-items: center;
 
