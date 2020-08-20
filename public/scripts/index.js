@@ -26,7 +26,7 @@ function activateButtons(){
         window.location = "/buys"
     })
     btSearch.addEventListener("click",()=>{
-        window.location = "/month"
+        window.location = "/month/dateCreate"
     })
     setInterval(()=>{
         if(navigator.onLine){

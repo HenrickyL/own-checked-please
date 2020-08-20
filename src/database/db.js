@@ -36,7 +36,7 @@ const tables=[
         body:{
             id:'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL',
             title:'VARCHAR(45)',
-            dateCreate: 'DATE',
+            dateCreate: 'DATE', // 2020/08/20
             dateEnded:'DATE',
             countBuys: 'INTEGER',
             valueSum:'FLOAT',

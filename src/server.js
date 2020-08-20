@@ -72,13 +72,13 @@ app.get('/data',(req,res)=>{
     })
 })
 
-app.get('/buys?/?:id',(req, res)=>{
-    
+app.get('/buys?/?:id?/?:value',(req, res)=>{
+    let sortBy = req.params.value
     let billId=req.params.id
     let categories,buysRow, thisBill
     
 
-    db.all(`SELECT * FROM buy WHERE bill_id = ${Number(billId)};`,(err,rows)=>{
+    db.all(`SELECT * FROM buy WHERE bill_id = ${Number(billId)} ORDER BY ${sortBy} ASC;`,(err,rows)=>{
         if(err){
             console.log(err)
             return res.send("error ao carregar os dados<buys>")
@@ -110,9 +110,9 @@ app.get('/buys?/?:id',(req, res)=>{
     })
 
 })
-app.post('/savebuy/?:id',(req, res)=>{
+app.post('/savebuy/?:id?',(req, res)=>{
     let billId=req.params.id
-
+    
     const query = `
         INSERT INTO buy(
             value,
@@ -149,7 +149,7 @@ app.post('/savebuy/?:id',(req, res)=>{
                     console.log("add Error",err)
                     return res.send("Erro ao inserir os dados")
                 }
-                return res.redirect(301,'/buys/'+billId)
+                return res.redirect(301,'/buys/'+billId+'/buyDate')
             })
 
 
@@ -159,6 +159,8 @@ app.post('/savebuy/?:id',(req, res)=>{
 
 
 app.post('/savebill',(req,res)=>{
+
+    let limit = req.body.limit==''?0:req.body.limit
     const query = `
         INSERT INTO bill(
             title,
@@ -179,7 +181,7 @@ app.post('/savebill',(req,res)=>{
         `${d.getFullYear()}-${fd(d.getMonth()+1)}-${fd(d.getDate())}`,
         0,
         0,
-        req.body.limit,
+        limit,
         req.body.description,
         1,
         req.body.period
@@ -190,7 +192,7 @@ app.post('/savebill',(req,res)=>{
             return res.send("Erro ao inserir os dados")
         }
 
-        return res.redirect(301,'/month')
+        return res.redirect(301,'/month/dateCreate')
 
     })
     
@@ -200,23 +202,73 @@ app.post('/savebill',(req,res)=>{
 
 
 
-app.get('/month',(req, res)=>{
+app.get('/month?/?:id',(req, res)=>{
+    let id = req.params.id
+    let sortBy, dir
+    let x = id.split('-')
+    if(x.length>1){
+        sortBy = x[0]
+        dir= x[1]
+    }else{
+        sortBy = id
+        dir = 'ASC'
+    }
+
     let per,billRows
     db.all(`SELECT * FROM period`,(err,rows)=>{
         if(err){
             return console.log(err)
         } 
         per = rows
-        db.all(`SELECT * FROM bill`,(err,rows)=>{
+        db.all(`SELECT * FROM bill ORDER BY ${sortBy} ${dir}`,(err,rows)=>{
             if(err){
                 return console.log(err)
             } 
             billRows=rows
-            return res.render("month.html",{periods:per,bills:billRows})
+            //status
+            let active=[], closed=[], paid = []
+            billRows.forEach(b=>{
+                if(b.status_id ==1) active.push(b)
+                else if(b.status_id ==2) closed.push(b)
+                else paid.push(b)
+            })
+
+
+            return res.render("month.html",{periods:per,bills:billRows,active:active,closed:closed,paid:paid})
         })
     })
 })
 
+app.get('/deletebuy/:id/:value',(req,res)=>{
+    let billId = req.params.id
+    let buyId = req.params.value
+    db.all(`UPDATE bill SET 
+        countBuys = countBuys - ${1},
+        valueSum = valueSum - (SELECT value FROM buy WHERE id = ${buyId})
+        WHERE id = ${billId}`,(err)=>{
+
+        db.all(`DELETE FROM buy
+        WHERE id = ${buyId};`,(err)=>{
+            res.redirect(301,`/buys/${billId}`)
+        })
+    })
+})
+app.get('/deletebill/:id',(req,res)=>{
+    let billId = req.params.id
+    db.all(`DELETE FROM bill
+        WHERE id = ${billId};`,(err)=>{
+            res.redirect(301,`/month/dateCreate`)
+        })
+})
+
+app.get('/closebill/?:id',(req,res)=>{
+    let billId = req.params.id
+    db.all(`UPDATE bill SET 
+        status_id= status_id + ${1}
+        WHERE id = ${billId}`,(err)=>{
+            res.redirect(301,`/month/dateCreate`)
+        })
+})
 
 
 

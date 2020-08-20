@@ -32,11 +32,11 @@
             </div>
             <div class="filter-options" alt="filto">
                 <label for="filter">Filtrar por:</label>
-                <select name="filter" id="filter" alt="Filtro">
+                <select name="filter" id="filter" alt="Filtro" onchange="filtered()">
                     
-                        <option  value="data">Data</option>
-                        <option value="valor">Valor</option>
-                        <option value="categoria">Categoria</option>
+                        <option  value="buyDate">Data</option>
+                        <option value="value">Valor</option>
+                        <option value="category_id">Categoria</option>
                 </select>
                 
             </div>
@@ -45,15 +45,18 @@
         <details class="list-translations" open>
             <div class="ajuste"></div>
             <summary class="title-list" alt="Lista de traduções">
-                <h2><div class="buys-month"> {{thisBill.title}}</div></h2><span class="qtd">R${{thisBill.valueSum}}</span>
+                <h2><div class="buys-month"> {{thisBill.title}}</div></h2><span class="qtd">R${{thisBill.valueSum}} </span>
             </summary>
             
         {% for b in buys %}
-            <div class="translation">
-                <div class="title-translation" >
-                    <h3>{{b.buyDate}}</h3><span class="update">R$ {{b.value}}</span>
+
+            
+            <div class="translation" id='{{b.id}}'>
+                <div class="title-translation   category_{{b.category_id}}" >
+                    <h3>{{b.buyDate}}</h3><span class="update">R$ {{b.value}} <a href='/deletebuy/{{thisBill.id}}/{{b.id}}'><button class='bt-trash'></button></a></span>
                 </div>
                 <span>{{b.description}}</span>
+                
                 <div class="buy-category"></div>
             </div>
 
@@ -62,8 +65,9 @@
         
        
         </details>
-
+        {% if thisBill.status_id ==1 %}
         <button class="bt-add">+</button>
+        {% endif %}
 <!-- ////////////////////////////////////////////////////////////// -->
         <div class="add-popup hide"></div>
         
@@ -139,12 +143,35 @@
             </div>
             </div>
             <ul>
-                <li>Alterar limite</li>
-                <li>Alterar periodo</li>                
-                <li>Apagar conta</li>
-                <li>Encerrar conta</li>
+                <li>Redefinir Limite</li>
+                <li>Redefinir Periodo</li>
+                {% if thisBill.status_id < 3 %}
+                
+                    {% if thisBill.status_id == 1 %}
+                      <a href='/closebill/{{thisBill.id}}'>Fechar Conta</a>
+                    {% else %}
+                      <a href='/closebill/{{thisBill.id}}'>Quitar Conta</a>
+                    {% endif %} 
+                {% endif %}                
             </ul>
         </div>
+
+        {# <fieldset class="update-bill">
+            <form action="/updateBill" method="POST">
+                <div class="field">
+                    <label for="rLimit">Redefinir Limite</label>
+                    <input type="number" name='rLimit' id='rLimit'>
+                </div>
+                <div class="field">
+                    <label for=""></label>
+                    <input type="text">
+                </div>
+            </form>
+        </fieldset> #}
+
+
+
+
 
         <div class="search-bar">
             <input type="text" id="search" placeholder="Pesquisar">
@@ -167,5 +194,12 @@
         },1500)
     }
     </script> -->
+
+    <script>
+        function filtered(){
+            var x = document.getElementById("filter")
+            window.location = "/buys/"+{{thisBill.id}}+'/'+x.value
+        }
+    </script>
     <script type="module" src="/scripts/buys.js"></script>
 </body>

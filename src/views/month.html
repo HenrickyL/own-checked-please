@@ -26,21 +26,24 @@
     <main id="page-monitor-views">
         <header class="monitor-box">
             <div class="statistics">
-                <span>Resultados:</span>
-                <span>Qtd Contas:</span>
+                <span><b>Qtd Contas: {{bills.length}}</b></span>
                 <p>
-                            
-                    <span>Ativas:</span>
-                    <span>desativas:</span>
+                    <span>Ativas: <b>{{active.length}}</b></span>
+                    <span>Fechadas:<b>{{closed.length}}</b></span>
+                    <span>Pagas:<b>{{paid.length}}</b></span>
+
                 </p>
             </div>
             <div class="filter-options" alt="filto">
                 <label for="filter">Filtrar por:</label>
-                <select name="filter" id="filter" alt="Filtro">
+                <select name="filter" id="filter" alt="Filtro" onchange="filtered()">
                     
-                    <option  value="data">Data</option>
-                    <option value="valor">Valor</option>
-                    <option value="categoria">Categoria</option>
+                    <option  value="dateCreate">Data</option>
+                    <option value="title">Title</option>
+                    <option value="valueSum-ASC">Valor ^</option>
+                    <option value="valueSum-DESC">Valor v</option>
+                    <option value="status_id">Status</option>
+
                 </select>
                 
             </div>
@@ -53,14 +56,32 @@
             </summary>
             
             {% for b in bills %}
+            
+              {% if b.status_id == 2 %}
+                <div class="translation closed">
+              {% elif b.status_id == 3 %}
+                <div class="translation paid">
+              {% else %}
                 <div class="translation">
+              {% endif %}
                     <div class="title-translation" >
-                        <h3>{{b.dateCreate}}</h3> <h2 class="title"> {{b.title}}</h2>  <span class="update">R$ {{b.valueSum}}</span>
-                        
+                        <h3>{{b.dateCreate}}</h3>
+                         <h2 class="title"> {{b.title}}</h2>
+                        <span class="update">R$ {{b.valueSum}}<a href='/deletebill/{{b.id}}'><button class='bt-trash'></button></a></span>
                     </div>
                     <span>{{b.description}}</span>
                     <div class="buy-category"></div>
                     <div class='billId hide'>{{b.id}}</div>
+                    <div class="bar">
+                        <div class="total"  
+                            {% if b.valueSum <= b.valueLimit %} style='width:{{b.valueSum/(b.valueLimit+1)*100}}vw'{% else %} style='width:{{b.valueLimit/b.valueSum*100}}vw'{% endif %} ></div>
+                        <div class="limit" >|</div>
+                        {% if  b.valueLimit>0 %}
+                            <div class="extra" style='width:{{ (b.valueSum - b.valueLimit) / b.valueSum*100 }}vw' ></div>
+                        {% endif %}
+                        <a href="/buys/{{b.id}}/buyDate"><button class='bt-bill'></button></a>
+                        
+                    </div>
                 </div>
             {% endfor %}
 
@@ -175,6 +196,11 @@
             intro.classList.add("hiding")
         },200)
     </script>  -->
-
+    <script>
+        function filtered(){
+            var x = document.getElementById("filter")
+            window.location = "/month/"+x.value
+        }
+    </script>
     <script type="module" src="/scripts/month.js"></script>
 </body>

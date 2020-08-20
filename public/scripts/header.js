@@ -15,6 +15,8 @@ let searchBar = null
 let searchInput = null
 let searchButton = null
 
+let allBuys = null
+
 export function loadButons(){
     btReturn = document.querySelector(".bt-return")
     btOp = document.querySelector(".bt-options")
@@ -22,6 +24,7 @@ export function loadButons(){
     searchBar = document.querySelector('.search-bar')
     searchInput = document.querySelector('.search-bar input')
     searchButton = document.querySelector('.search-bar button')
+    allBuys = Array.from( document.querySelectorAll('.translation'))
     ////////////////////////////
     
 
@@ -29,7 +32,7 @@ export function loadButons(){
 }
 export function activateButtons(){
     btReturn.addEventListener("click",()=>{
-        window.location = "/month"
+        window.location = "/month/dateCreate"
     })
     
     btOp.addEventListener('focus',()=>{
@@ -59,6 +62,15 @@ export function activateButtons(){
         setTimeout(()=>{
             searchBar.classList.remove('focused')
         },500)
+    })
+    //ativar o click 
+    allBuys.forEach(b=>{
+        b.addEventListener('click',()=>{
+            b.classList.add('selected')
+        })
+        b.addEventListener('mouseleave',()=>{
+            b.classList.remove('selected')
+        })
     })
 
 

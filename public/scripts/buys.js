@@ -15,27 +15,8 @@ window.addEventListener("load",()=>{
        let dateNow = document.querySelector("#date-now")
        let addDate = document.getElementById("add-date")
        let addTime = document.getElementById("add-time")
+    //    let allBuys = Array.from( document.querySelectorAll('.translation'))
     header.activateButtons()
-        elemen.forEach(elem=>{
-            elem.addEventListener("blur",event=>{
-                // if(event.key === "Enter"){
-                    
-                    let valor = v.value%1==0? (v.value===''?'0':v.value)+",00" : v.value;
-                    let note = `\n------------------------\nR$ ${valor}`
-
-                    if(elem.textContent.search("------------------------")===-1){
-                        d.textContent += note
-                    }else if(d.textContent.lastIndexOf("\n")>0){
-                        let x =d.textContent
-                        d.textContent = x.substring(0, x.lastIndexOf("\n"));
-                        x = d.textContent
-                        d.textContent = x.substring(0, x.lastIndexOf("\n"));
-                        x = d.textContent
-                        d.textContent = x.substring(0, x.lastIndexOf("\n"));
-                        d.textContent += note
-                    }
-            })
-        })
         add.addEventListener("click",()=>{
             let d = new Date()
             dateNow.textContent = `${leftpad(d.getDate())}/${leftpad(d.getMonth()+1)} - ${leftpad(d.getHours())}:${leftpad(d.getMinutes())}`
@@ -50,6 +31,15 @@ window.addEventListener("load",()=>{
             addBox.classList.add("hide")
             popup.classList.add("hide")
         })   
+
+        // allBuys.forEach(b=>{
+        //     b.addEventListener('click',()=>{
+        //         b.classList.add('selected')
+        //     })
+        //     b.addEventListener('clickout',()=>{
+        //         b.classList.remove('selected')
+        //     })
+        // })
     
     console.log("<Page Loaded!>")
 
